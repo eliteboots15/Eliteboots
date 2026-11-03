@@ -20,6 +20,9 @@ section{padding:72px 0}.section-head{display:flex;align-items:end;justify-conten
 .banner{background:linear-gradient(100deg,#211b10,#121212 70%);border:1px solid #574626;padding:38px;display:flex;justify-content:space-between;align-items:center;gap:24px}.banner h2{margin:0 0 8px;font-size:30px}.banner p{margin:0;color:#c4c0b8}
 footer{border-top:1px solid #292319;padding:34px 0;color:var(--muted);font-size:13px}.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.wa-float{position:fixed;right:20px;bottom:20px;z-index:20;background:#1fbf67;color:#06190e;padding:14px 18px;border-radius:40px;font-weight:900;box-shadow:0 8px 28px #0009}
 .note{font-size:12px;color:#8f8a80;margin-top:18px}
+.nav-actions{display:flex;align-items:center;gap:10px}.cart-toggle{background:#171717;border:1px solid var(--gold);color:var(--gold);padding:11px 14px;font-weight:800;cursor:pointer;border-radius:3px}.cart-toggle span{display:inline-grid;place-items:center;background:var(--gold);color:#111;border-radius:50%;width:21px;height:21px;margin-left:5px}
+.cart-backdrop{display:none;position:fixed;inset:0;background:#000b;z-index:30;align-items:center;justify-content:center;padding:16px}.cart-backdrop.open{display:flex}.cart-panel{width:min(560px,100%);max-height:85vh;overflow:auto;background:#151515;border:1px solid #574626;padding:24px;box-shadow:0 20px 70px #000}.cart-head{display:flex;align-items:center;justify-content:space-between;gap:15px}.cart-head h2{margin:0}.cart-close{background:transparent;border:1px solid #62502e;color:var(--gold);padding:8px 12px;cursor:pointer}.cart-empty{color:var(--muted);padding:25px 0}.cart-line{display:grid;grid-template-columns:1fr auto;gap:12px;padding:15px 0;border-bottom:1px solid #30291e}.cart-line strong{display:block}.cart-line small{color:var(--muted)}.cart-controls{display:flex;align-items:center;gap:8px;margin-top:9px}.cart-controls button{background:#292319;color:var(--gold);border:1px solid #574626;padding:5px 10px;cursor:pointer}.cart-total{display:flex;justify-content:space-between;font-size:20px;font-weight:900;padding:20px 0;color:var(--gold2)}.checkout{width:100%;border:0;cursor:pointer}.cart-help{font-size:12px;color:var(--muted);line-height:1.5;margin-top:12px}
+@media(max-width:760px){.nav-actions .nav-cta{display:none}}
 @media(max-width:760px){nav{display:none}.hero{grid-template-columns:1fr;padding:55px 0 25px}.hero-art{height:270px}.halo{width:230px;height:230px}.products{grid-template-columns:1fr 1fr}.product-visual{height:170px}.product-visual .boot-icon{font-size:70px}.section-head{display:block}.section-head p{margin-top:12px}.banner{display:block}.banner .btn{margin-top:20px}}
 @media(max-width:480px){.products{grid-template-columns:1fr}.product-visual{height:210px}.hero h1{font-size:48px}.nav{height:66px}.brand{font-size:19px}}
 </style>
@@ -28,7 +31,7 @@ footer{border-top:1px solid #292319;padding:34px 0;color:var(--muted);font-size:
 <header><div class="wrap nav">
   <a class="brand" href="#">ELITE<span>BOOTS</span></a>
   <nav><a href="#coleccion">Colección</a><a href="#marcas">Marcas</a><a href="#contacto">Contacto</a></nav>
-  <a class="nav-cta" href="https://wa.me/34613023681?text=Hola%20EliteBoots%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20botas." target="_blank" rel="noopener">Pedir por WhatsApp</a>
+  <div class="nav-actions"><button class="cart-toggle" id="open-cart" type="button">🛒 Carrito <span id="cart-count">0</span></button><a class="nav-cta" href="https://wa.me/34613023681?text=Hola%20EliteBoots%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20botas." target="_blank" rel="noopener">Pedir por WhatsApp</a></div>
 </div></header>
 <main>
 <div class="wrap hero">
@@ -48,15 +51,16 @@ footer{border-top:1px solid #292319;padding:34px 0;color:var(--muted);font-size:
   <div class="section-head"><div><div class="eyebrow">Selección EliteBoots</div><h2>La colección</h2></div><p>Modelos de ejemplo para presentar tu catálogo. Confirma disponibilidad, tallas y precio antes de publicar cada producto.</p></div>
   <div class="filters"><button class="filter active" data-filter="Todas">Todas</button><button class="filter" data-filter="Nike">Nike</button><button class="filter" data-filter="Adidas">Adidas</button><button class="filter" data-filter="Puma">Puma</button></div>
   <div class="products">
-    <article class="product" data-brand="Nike"><div class="product-visual"><span class="brand-label">NIKE</span><span class="boot-icon">👟</span></div><div class="product-info"><h3>Velocidad Pro</h3><p>Inspiración Mercurial · Adultos</p><div class="product-bottom"><span class="price">119,99 €</span><button class="buy" data-product="Nike Velocidad Pro">Consultar</button></div></div></article>
-    <article class="product" data-brand="Adidas"><div class="product-visual"><span class="brand-label">ADIDAS</span><span class="boot-icon">👟</span></div><div class="product-info"><h3>Control Elite</h3><p>Inspiración Predator · Adultos</p><div class="product-bottom"><span class="price">109,99 €</span><button class="buy" data-product="Adidas Control Elite">Consultar</button></div></div></article>
-    <article class="product" data-brand="Puma"><div class="product-visual"><span class="brand-label">PUMA</span><span class="boot-icon">👟</span></div><div class="product-info"><h3>Agility Pro</h3><p>Inspiración Future · Adultos</p><div class="product-bottom"><span class="price">99,99 €</span><button class="buy" data-product="Puma Agility Pro">Consultar</button></div></div></article>
+    <article class="product" data-brand="Nike"><div class="product-visual"><span class="brand-label">NIKE</span><span class="boot-icon">👟</span></div><div class="product-info"><h3>Velocidad Pro</h3><p>Inspiración Mercurial · Adultos</p><div class="product-bottom"><span class="price">119,99 €</span><button class="buy" data-product="Nike Velocidad Pro">Añadir al carrito</button></div></div></article>
+    <article class="product" data-brand="Adidas"><div class="product-visual"><span class="brand-label">ADIDAS</span><span class="boot-icon">👟</span></div><div class="product-info"><h3>Control Elite</h3><p>Inspiración Predator · Adultos</p><div class="product-bottom"><span class="price">109,99 €</span><button class="buy" data-product="Adidas Control Elite">Añadir al carrito</button></div></div></article>
+    <article class="product" data-brand="Puma"><div class="product-visual"><span class="brand-label">PUMA</span><span class="boot-icon">👟</span></div><div class="product-info"><h3>Agility Pro</h3><p>Inspiración Future · Adultos</p><div class="product-bottom"><span class="price">99,99 €</span><button class="buy" data-product="Puma Agility Pro">Añadir al carrito</button></div></div></article>
   </div>
   <p class="note">Los nombres, imágenes ilustrativas y precios son una maqueta inicial, no un inventario confirmado. Sustitúyelos por tus productos reales antes de vender.</p>
 </div></section>
 <section id="marcas"><div class="wrap"><div class="section-head"><div><div class="eyebrow">Las marcas</div><h2>Elige tu juego</h2></div></div><div class="brands"><div class="brand-card"><strong>NIKE</strong><p>Velocidad y explosividad</p></div><div class="brand-card"><strong>ADIDAS</strong><p>Control y precisión</p></div><div class="brand-card"><strong>PUMA</strong><p>Agilidad y creatividad</p></div></div></div></section>
 <section id="contacto"><div class="wrap"><div class="banner"><div><h2>¿Preparado para salir al campo?</h2><p>Consulta modelos, tallas y disponibilidad directamente con EliteBoots.</p></div><a class="btn" href="https://wa.me/34613023681?text=Hola%20EliteBoots%2C%20quiero%20consultar%20vuestro%20cat%C3%A1logo." target="_blank" rel="noopener">Hablar por WhatsApp</a></div></div></section>
 </main>
+<div class="cart-backdrop" id="cart-backdrop" aria-hidden="true"><div class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title"><div class="cart-head"><h2 id="cart-title">Tu carrito</h2><button class="cart-close" id="close-cart" type="button">Cerrar ✕</button></div><div id="cart-items"></div><div class="cart-total"><span>Total</span><span id="cart-total">0,00 €</span></div><button class="btn checkout" id="checkout" type="button">Enviar pedido por WhatsApp</button><p class="cart-help">El pedido se enviará por WhatsApp para confirmar tallas, disponibilidad, envío y forma de pago. Los precios mostrados son orientativos hasta que confirmes el catálogo.</p></div></div>
 <footer><div class="wrap footer-row"><div><strong class="brand">ELITE<span style="color:var(--gold)">BOOTS</span></strong><div style="margin-top:8px">Juega como un élite.</div></div><div>Pedidos: +34 613 023 681<br>© <span id="year"></span> EliteBoots</div></div></footer>
 <a class="wa-float" href="https://wa.me/34613023681?text=Hola%20EliteBoots%2C%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener">WhatsApp ↗</a>
 <script>
@@ -65,9 +69,43 @@ document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',(
  document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
  document.querySelectorAll('.product').forEach(card=>card.style.display=(btn.dataset.filter==='Todas'||card.dataset.brand===btn.dataset.filter)?'':'none');
 }));
+const cart=[];
+const money=n=>n.toLocaleString('es-ES',{style:'currency',currency:'EUR'});
+const backdrop=document.getElementById('cart-backdrop');
+function renderCart(){
+ const holder=document.getElementById('cart-items');
+ document.getElementById('cart-count').textContent=cart.reduce((n,p)=>n+p.qty,0);
+ if(!cart.length){holder.innerHTML='<p class="cart-empty">Tu carrito está vacío. Añade unas botas para empezar.</p>';document.getElementById('cart-total').textContent=money(0);return;}
+ holder.innerHTML=cart.map((p,i)=>'<div class="cart-line"><div><strong>'+p.name+'</strong><small>'+money(p.price)+' / unidad</small><div class="cart-controls"><button type="button" data-minus="'+i+'" aria-label="Quitar una unidad">−</button><span>'+p.qty+'</span><button type="button" data-plus="'+i+'" aria-label="Añadir una unidad">+</button><button type="button" data-remove="'+i+'">Eliminar</button></div></div><strong>'+money(p.price*p.qty)+'</strong></div>').join('');
+ document.getElementById('cart-total').textContent=money(cart.reduce((n,p)=>n+p.price*p.qty,0));
+}
+function openCart(){backdrop.classList.add('open');backdrop.setAttribute('aria-hidden','false');}
+function closeCart(){backdrop.classList.remove('open');backdrop.setAttribute('aria-hidden','true');}
 document.querySelectorAll('.buy').forEach(btn=>btn.addEventListener('click',()=>{
- const msg='Hola EliteBoots, me interesa el modelo '+btn.dataset.product+'. ¿Podéis confirmarme tallas y disponibilidad?';
- window.open('https://wa.me/34613023681?text='+encodeURIComponent(msg),'_blank','noopener');
+ const card=btn.closest('.product'),name=btn.dataset.product;
+ const priceText=card.querySelector('.price').textContent;
+ const price=Number(priceText.replace(/[^0-9,]/g,'').replace(',','.'));
+ const found=cart.find(p=>p.name===name);
+ if(found)found.qty++;else cart.push({name,price,qty:1});
+ renderCart();openCart();
 }));
+document.getElementById('open-cart').addEventListener('click',openCart);
+document.getElementById('close-cart').addEventListener('click',closeCart);
+backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeCart();});
+document.getElementById('cart-items').addEventListener('click',e=>{
+ const minus=e.target.dataset.minus,plus=e.target.dataset.plus,remove=e.target.dataset.remove;
+ if(minus!==undefined){cart[minus].qty--;if(cart[minus].qty<=0)cart.splice(minus,1);}
+ if(plus!==undefined)cart[plus].qty++;
+ if(remove!==undefined)cart.splice(remove,1);
+ renderCart();
+});
+document.getElementById('checkout').addEventListener('click',()=>{
+ if(!cart.length){alert('Tu carrito está vacío.');return;}
+ const lines=cart.map(p=>p.name+' x'+p.qty+' — '+money(p.price*p.qty));
+ const total=money(cart.reduce((n,p)=>n+p.price*p.qty,0));
+ const msg='Hola EliteBoots, quiero hacer este pedido:\n'+lines.join('\n')+'\nTotal orientativo: '+total+'\n¿Podéis confirmar tallas, disponibilidad, envío y forma de pago?';
+ window.open('https://wa.me/34613023681?text='+encodeURIComponent(msg),'_blank','noopener');
+});
+renderCart();
 </script>
 </body></html>
